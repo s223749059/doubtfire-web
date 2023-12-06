@@ -42,7 +42,6 @@ import 'build/src/app/visualisations/alignment-bullet-chart.js';
 import 'build/src/app/visualisations/achievement-custom-bar-chart.js';
 import 'build/src/app/visualisations/alignment-bar-chart.js';
 import 'build/src/app/visualisations/achievement-box-plot.js';
-import 'build/src/app/tasks/task-status-selector/task-status-selector.js';
 import 'build/src/app/tasks/modals/upload-submission-modal/upload-submission-modal.js';
 import 'build/src/app/tasks/modals/grade-task-modal/grade-task-modal.js';
 import 'build/src/app/tasks/modals/modals.js';
@@ -212,6 +211,7 @@ import { FileDownloaderService } from './common/file-downloader/file-downloader.
 import { CheckForUpdateService } from './sessions/service-worker-updater/check-for-update.service';
 import { TaskSubmissionService } from './common/services/task-submission.service';
 import { TaskAssessmentModalService } from './common/modals/task-assessment-modal/task-assessment-modal.service';
+import { TaskStatusSelectorComponent } from './tasks/task-status-selector/task-status-selector.component';
 import { TaskSubmissionHistoryComponent } from './tasks/task-submission-history/task-submission-history.component';
 import { HeaderComponent } from './common/header/header.component';
 import { GlobalStateService } from './projects/states/index/global-state.service';
@@ -368,6 +368,10 @@ DoubtfireAngularJSModule.directive(
 DoubtfireAngularJSModule.directive(
   'taskAssessmentComment',
   downgradeComponent({ component: TaskAssessmentCommentComponent }),
+);
+DoubtfireAngularJSModule.directive(
+  'taskStatusSelector',
+  downgradeComponent({ component: TaskStatusSelectorComponent })
 );
 DoubtfireAngularJSModule.directive(
   'taskSubmissionHistory',
