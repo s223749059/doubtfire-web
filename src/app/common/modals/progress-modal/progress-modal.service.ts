@@ -8,8 +8,10 @@ import { ProgressModalComponent } from './progress-modal.component';
 export class ProgressModalService {
   constructor(public dialog: MatDialog) {}
 
-  public show(task: any) {
+  public show(title: string, message: string) {
     let dialogRef: MatDialogRef<ProgressModalComponent, any>;
     dialogRef = this.dialog.open(ProgressModalComponent);
+    dialogRef.componentInstance.title = title;
+    dialogRef.componentInstance.message = message;
   }
 }
