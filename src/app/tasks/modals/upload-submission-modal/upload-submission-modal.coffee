@@ -1,13 +1,8 @@
 angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
 
-#
-# A modal to run through uploading a submission
-#
 .factory('UploadSubmissionModal', ($modal, alertService) ->
   UploadSubmissionModal = {}
-  #
-  # Open a grade task modal with the provided task
-  #
+
   UploadSubmissionModal.show = (task, reuploadEvidence, isTestSubmission = false) ->
     # Refuse to open modal if group task and not in a group
     if !isTestSubmission && task.isGroupTask() && !task.group
@@ -16,8 +11,6 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
 
     if isTestSubmission
       task.canReuploadEvidence = -> false
-      # task.definition = {id: task.id, abbreviation: task.abbreviation, upload_requirements: task.uploadRequirements}
-      # task.project = -> project
       task.isTestSubmission = isTestSubmission
 
     $modal.open
@@ -34,8 +27,7 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
 )
 .controller('UploadSubmissionModalCtrl', ($scope, $rootScope, $timeout, $modalInstance, newTaskService, newProjectService, task, reuploadEvidence, alertService, outcomeService, PrivacyPolicy) ->
   $scope.privacyPolicy = PrivacyPolicy
-  # Expose task to scope
-  $scope.task = task
+  $scope.task = task # Expose task to scope
 
   # Set up submission types
   submissionTypes = _.chain(newTaskService.submittableStatuses).map((status) ->
@@ -49,7 +41,6 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
   if $scope.task.isTestSubmission
     $scope.submissionType = 'test_submission'
     submissionTypes = {'test_submission': 'Test Submission'}
-    # submissionTypes['test_submission'] = 'Test Submission'
   else
     $scope.submissionType = if reuploadEvidence then 'reupload_evidence' else $scope.task.status
 
@@ -57,7 +48,6 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
 
   # Upload files
   $scope.uploader = {
-    # url: Task.generateSubmissionUrl($scope.task.project, $scope.task)
     url: if $scope.task.isTestSubmission then $scope.task.testSubmissionUrl() else $scope.task.submissionUrl()
     files: _.chain(task.definition.uploadRequirements).map((file) ->
       [file.key, { name: file.name, type: file.type }]
@@ -90,9 +80,7 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
         unless $scope.task.isTestSubmission
           response = $scope.uploader.response
           expectedStatus = if ["need_help", "ready_for_feedback"].includes($scope.submissionType) then $scope.submissionType else response.status
-
           $scope.task.updateFromJson(response, newTaskService.mapping)
-
           $scope.task.processTaskStatusChange(expectedStatus, alertService)
       ), 1500)
   }
@@ -137,8 +125,7 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
   }
   states.initialise()
 
-  # If the submission type changes, then modify status (if applicable) and
-  # reinitialise states
+  # If the submission type changes, then modify status (if applicable) and reinitialise states
   $scope.onSelectNewSubmissionType = (newType) ->
     # Only change status if not reuploading evidence
     $scope.task.status = newType unless newType == 'reupload_evidence'
@@ -161,8 +148,7 @@ angular.module('doubtfire.tasks.modals.upload-submission-modal', [])
         # Disable group if group members not allocated anything
         group: ->
           _.chain($scope.team.memberContributions).map('confRating').compact().value().length == 0
-        # Disable alignment if no alignments made (need at least 1) and
-        # if description is blank
+        # Disable alignment if no alignments made (need at least 1) and description is blank
         alignment: ->
           _.chain($scope.alignments).map('rating').compact().value().length == 0 ||
           $scope.alignmentsRationale.trim().length == 0

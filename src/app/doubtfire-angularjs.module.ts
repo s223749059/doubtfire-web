@@ -43,7 +43,6 @@ import 'build/src/app/visualisations/achievement-custom-bar-chart.js';
 import 'build/src/app/visualisations/alignment-bar-chart.js';
 import 'build/src/app/visualisations/achievement-box-plot.js';
 import 'build/src/app/tasks/task-status-selector/task-status-selector.js';
-import 'build/src/app/tasks/modals/upload-submission-modal/upload-submission-modal.js';
 import 'build/src/app/tasks/modals/grade-task-modal/grade-task-modal.js';
 import 'build/src/app/tasks/modals/modals.js';
 import 'build/src/app/tasks/task-definition-selector/task-definition-selector.js';
@@ -174,6 +173,7 @@ import { ExtensionCommentComponent } from './tasks/task-comments-viewer/extensio
 import { TaskAssessmentCommentComponent } from './tasks/task-comments-viewer/task-assessment-comment/task-assessment-comment.component';
 import { ExtensionModalService } from './common/modals/extension-modal/extension-modal.service';
 import { CalendarModalService } from './common/modals/calendar-modal/calendar-modal.service';
+import { UploadSubmissionModalService } from './tasks/modals/upload-submission-modal/upload-submission-modal.service';
 import { CampusListComponent } from './admin/institution-settings/campuses/campus-list/campus-list.component';
 import { ActivityTypeListComponent } from './admin/institution-settings/activity-type-list/activity-type-list.component';
 import { InstitutionSettingsComponent } from './admin/institution-settings/institution-settings.component';
@@ -264,6 +264,7 @@ DoubtfireAngularJSModule.factory(
 DoubtfireAngularJSModule.factory('DoubtfireConstants', downgradeInjectable(DoubtfireConstants));
 DoubtfireAngularJSModule.factory('ExtensionModal', downgradeInjectable(ExtensionModalService));
 DoubtfireAngularJSModule.factory('CalendarModal', downgradeInjectable(CalendarModalService));
+DoubtfireAngularJSModule.factory('UploadSubmissionModalService', downgradeInjectable(UploadSubmissionModalService));
 DoubtfireAngularJSModule.factory('TaskCommentService', downgradeInjectable(TaskCommentService));
 DoubtfireAngularJSModule.factory('tutorialService', downgradeInjectable(TutorialService));
 DoubtfireAngularJSModule.factory('streamService', downgradeInjectable(TutorialStreamService));
