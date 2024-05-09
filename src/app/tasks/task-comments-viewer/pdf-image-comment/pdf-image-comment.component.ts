@@ -46,12 +46,10 @@ export class PdfImageCommentComponent implements OnInit, OnDestroy {
   }
 
   public openCommentsModal() {
-    if (this.comment.commentType == 'image') {
+    if (this.resourceUrl) {
       this.commentsModalRef.show(this.resourceUrl, this.comment.commentType);
     } else {
-      if (this.comment.commentType === 'pdf') {
-        this.fileDownloaderService.downloadFile(this.comment.attachmentUrl, "view.pdf");
-      }
+      this.downloadCommentResource(this.openCommentsModal.bind(this));
     }
   }
 }
